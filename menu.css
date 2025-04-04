@@ -28,7 +28,7 @@ button {
     padding: 15px 20px;
     font-size: 20px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background 0.3s, transform 0.2s;
     margin: 5px;
 }
@@ -182,3 +182,61 @@ button:active {
 .popup-content a:hover {
     text-decoration: underline;
 }
+
+/* Contenedor de los personajes fuera del menú */
+.characters {
+    position: absolute; /* Para que esté fuera del flujo normal del documento */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -10; /* Asegura que los personajes estén sobre el menú */
+}
+
+/* Estilos de los personajes */
+.character {
+    position: absolute;
+    width: 100px;  /* Ajusta el tamaño de los personajes */
+    height: 100px;
+    transition: transform 0.2s ease;
+    animation: moveContinuo 5s ease-in-out infinite;
+}
+
+/* Movimiento continuo */
+@keyframes moveContinuo {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    25% {
+        transform: translate(10px, -10px); /* Movimiento pequeño en diagonal */
+    }
+    50% {
+        transform: translate(-10px, 10px); /* Movimiento pequeño en diagonal */
+    }
+    75% {
+        transform: translate(5px, 5px); /* Movimiento pequeño hacia otra dirección */
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+/* Posiciones aleatorias */
+.character.fizz {
+    top: 20%; /* Posición inicial aleatoria */
+    left: 27%;
+    animation-delay: 0s;
+}
+
+.character.buzz {
+    top: 10%; /* Posición inicial aleatoria */
+    left: 67%;
+    animation-delay: 1s;
+}
+
+.character.fizzbuzz {
+    top: 70%; /* Posición inicial aleatoria */
+    left: 70%;
+    animation-delay: 2s;
+}
+
