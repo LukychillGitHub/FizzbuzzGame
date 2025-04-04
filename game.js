@@ -1,8 +1,9 @@
 (function() {
-    // Recuperar parámetros del menú desde la URL
+    // Recuperar parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
-    const difficultyParam = urlParams.get('difficulty') || 'normal'; // "easy", "normal", "hard"
-    const botsCount = parseInt(urlParams.get('botsCount')) || 1; // Número de bots
+    // Usamos "difficulty" y "bots" (de tu menú no se modifica)
+    const difficultyParam = urlParams.get('difficulty') || 'normal';  // "easy", "normal", "hard"
+    const botsCount = parseInt(urlParams.get('bots')) || 1;             // Número de bots
   
     // Mapear dificultad a tiempo (en segundos)
     const timeLimits = {
@@ -14,17 +15,17 @@
   
     // Variables de estado del juego
     let currentNumber = 1;
-    let turnIndex = 0; // 0: jugador, 1...botsCount: BOT1, BOT2, etc.
+    let turnIndex = 0; // 0: jugador, 1 a botsCount: BOT1, BOT2, ...
     let timeLeft = timeLimit;
     let timer;
     let isGameOver = false;
   
-    // Elementos del DOM
+    // Elementos del DOM (asegúrate de que estos IDs coincidan en tu HTML)
     const playerTurnLabel = document.getElementById('player-turn');
     const timerDisplay = document.getElementById('timer');
     const currentNumberDisplay = document.getElementById('current-number');
     const botResponseDiv = document.getElementById('bot-response');
-    const gameOverPopup = document.getElementById('game-over-popup');
+    const gameOverPopup = document.getElementById('gameover'); // en tu HTML el div de Game Over tiene id "gameover"
   
     // Botones de respuesta
     const btnFizz = document.getElementById('fizz');
@@ -32,19 +33,19 @@
     const btnFizzBuzz = document.getElementById('fizzbuzz');
     const btnNumber = document.getElementById('number');
   
-    // Eventos de respuesta (solo si es turno del jugador)
+    // Asignar eventos de respuesta (solo si es turno del jugador)
     btnFizz.addEventListener('click', () => { if (turnIndex === 0) playerAnswer('Fizz'); });
     btnBuzz.addEventListener('click', () => { if (turnIndex === 0) playerAnswer('Buzz'); });
     btnFizzBuzz.addEventListener('click', () => { if (turnIndex === 0) playerAnswer('FizzBuzz'); });
     btnNumber.addEventListener('click', () => { if (turnIndex === 0) playerAnswer(currentNumber.toString()); });
   
-    // Eventos del pop-up de Game Over
+    // Eventos del pop-up de Game Over (asumiendo que en tu HTML tienes botones con estos IDs)
     document.getElementById('restart-btn').addEventListener('click', restartGame);
     document.getElementById('menu-btn').addEventListener('click', () => {
       window.location.href = 'index.html';
     });
   
-    // Función para obtener la respuesta correcta según FizzBuzz
+    // Función para obtener la respuesta correcta según las reglas de FizzBuzz
     function getCorrectAnswer(n) {
       if (n % 3 === 0 && n % 5 === 0) return "FizzBuzz";
       if (n % 3 === 0) return "Fizz";
@@ -52,10 +53,10 @@
       return n.toString();
     }
   
-    // Actualiza el display del número actual
+    // Actualiza el display del número actual y el texto del botón "Número"
     function updateCurrentNumber() {
       currentNumberDisplay.textContent = currentNumber;
-      btnNumber.textContent = currentNumber; // El botón "Número" muestra el número actual
+      btnNumber.textContent = currentNumber;
     }
   
     // Actualiza el indicador de turno
@@ -82,28 +83,32 @@
       }, 1000);
     }
   
-    // Función para pasar al siguiente turno
+    // Reinicia el temporizador
+    function resetTimer() {
+      startTimer();
+    }
+  
+    // Pasa al siguiente turno de forma cíclica
     function nextTurn() {
-      // Avanzar el turno de forma cíclica
+      // Incrementa el turno en la secuencia: 0 (jugador), 1..botsCount (bots)
       turnIndex = (turnIndex + 1) % (botsCount + 1);
       updateTurnLabel();
       // Si es turno del jugador, actualizar display y reiniciar temporizador
       if (turnIndex === 0) {
         updateCurrentNumber();
-        startTimer();
+        resetTimer();
       } else {
-        // Turno de un bot
-        setTimeout(() => {
-          botAnswer();
-        }, 1000);
+        // Turno de un bot: esperar 1 segundo y ejecutar botTurn()
+        setTimeout(botTurn, 1000);
       }
     }
   
-    // Función para el turno del jugador
+    // Función para manejar la respuesta del jugador
     function playerAnswer(answer) {
       clearInterval(timer);
       const correct = getCorrectAnswer(currentNumber);
       if (answer.toLowerCase() === correct.toLowerCase()) {
+        // Respuesta correcta: avanza el número y pasa al siguiente turno
         currentNumber++;
         nextTurn();
       } else {
@@ -111,10 +116,10 @@
       }
     }
   
-    // Función para que un bot responda (siempre correcto)
-    function botAnswer() {
+    // Función para el turno del bot (siempre responde correctamente)
+    function botTurn() {
       const correct = getCorrectAnswer(currentNumber);
-      // Mostrar mensaje de respuesta del bot
+      // Mostrar mensaje de respuesta del bot (por ejemplo, en un div)
       botResponseDiv.textContent = `BOT${turnIndex} dice: ${correct}`;
       botResponseDiv.classList.remove('hidden');
       setTimeout(() => {
@@ -125,23 +130,25 @@
       }, 1500);
     }
   
-    // Función de Game Over
+
+   // Función de Game Over: se muestra el pop-up
     function gameOver() {
-      isGameOver = true;
-      clearInterval(timer);
-      gameOverPopup.classList.remove('hidden');
+        isGameOver = true;
+        clearInterval(timer);
+        gameOverPopup.classList.add('visible'); // Usamos visible para mostrar el pop-up
     }
   
-    // Función para reiniciar el juego
+    // Función para reiniciar el juego (manteniendo la dificultad y cantidad de bots)
     function restartGame() {
-      isGameOver = false;
-      currentNumber = 1;
-      turnIndex = 0;
-      gameOverPopup.classList.add('hidden');
-      updateCurrentNumber();
-      updateTurnLabel();
-      startTimer();
+        isGameOver = false;
+        currentNumber = 1;
+        turnIndex = 0;
+        gameOverPopup.classList.remove('visible'); // Ocultamos el pop-up
+        updateCurrentNumber();
+        updateTurnLabel();
+        startTimer();
     }
+  
   
     // Iniciar el juego al cargar la página
     window.onload = () => {

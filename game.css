@@ -68,8 +68,8 @@ body {
     color: #ffea00;
   }
   
-  /* Pop-up de Game Over */
-  #game-over-popup {
+/* Estilo para el Pop-up de Game Over */
+#gameover {
     position: fixed;
     top: 0;
     left: 0;
@@ -81,11 +81,15 @@ body {
     align-items: center;
     flex-direction: column;
     z-index: 1000;
+    display: none; /* Asegúrate de que inicialmente esté oculto */
   }
-  #game-over-popup.hidden {
-    display: none;
+  
+  /* Cuando el pop-up de Game Over es visible */
+  #gameover.visible {
+    display: flex; /* Mostrarlo solo cuando se active */
   }
-  #game-over-content {
+  
+  .popup-content {
     background-color: #333;
     padding: 30px;
     border-radius: 10px;
@@ -93,7 +97,9 @@ body {
     width: 80%;
     max-width: 400px;
   }
-  #game-over-content button {
+  
+  /* Botones dentro del pop-up */
+  .popup-content button {
     padding: 10px 20px;
     margin: 10px;
     font-size: 16px;
@@ -103,12 +109,8 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  #game-over-content button:hover {
-    background-color: #e64a19;
-  }
   
-  /* Clase para ocultar elementos */
-  .hidden {
-    display: none;
+  .popup-content button:hover {
+    background-color: #e64a19;
   }
   
