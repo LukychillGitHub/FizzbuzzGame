@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FizzBuzz Game</title>
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <div id="game-container">
+    <header id="game-header">
+      <h1>FizzBuzz Game</h1>
+      <div id="info">
+        <span id="player-turn">Tú</span> &nbsp;|&nbsp; Tiempo: <span id="timer">0</span>
+      </div>
+    </header>
+    <section id="game-main">
+      <div id="question">
+        <h2>Siguiente número:</h2>
+        <h3 id="current-number">1</h3>
+      </div>
+      <div id="answers">
+        <button id="fizz" class="answer-btn">Fizz</button>
+        <button id="buzz" class="answer-btn">Buzz</button>
+        <button id="fizzbuzz" class="answer-btn">FizzBuzz</button>
+        <button id="number" class="answer-btn">Número</button>
+      </div>
+      <div id="bot-response" class="hidden">
+        <p id="bot-message"></p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Pop-up de Game Over -->
+  <div id="game-over-popup" class="hidden">
+    <div id="game-over-content">
+      <h2>¡Game Over!</h2>
+      <p>Has perdido.</p>
+      <button id="restart-btn">Reiniciar Juego</button>
+      <button id="menu-btn">Volver al Menú</button>
+    </div>
+  </div>
+  
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FizzBuzz "The Game"</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <div id="menu-container">
+        <h1>FizzBuzz MiniJuego</h1>
+        <h2>Selecciona la cantidad de bots</h2>
+        <div class="bot-selection">
+            <button data-bots="1">1 Bot</button>
+            <button data-bots="2">2 Bots</button>
+            <button data-bots="3">3 Bots</button>
+        </div>
+        <h2>Selecciona la dificultad</h2>
+        <div class="difficulty-selection">
+            <button data-difficulty="easy">Fácil</button>
+            <button data-difficulty="normal">Normal</button>
+            <button data-difficulty="hard">Difícil</button>
+        </div>
+        <button id="play-button">Jugar</button>
+        <button id="rules-button">Reglas del Juego</button>
+        
+        <!-- Popup de Reglas -->
+        <div id="rules-popup" class="hidden">
+            <div id="rules-content">
+                <h2>Reglas del Juego</h2>
+                <p>Selecciona la cantidad de bots.</p>
+                <p>Elige la dificultad.</p>
+                <p>El número en pantalla te indica qué debes decir.</p>
+                <p>Si el número es múltiplo de 3, toca 'FIZZ'.</p>
+                <p>Si el número es múltiplo de 5, toca 'BUZZ'.</p>
+                <p>Si es múltiplo de ambos, toca 'FIZZBUZZ'.</p>
+                <p>Si no es múltiplo de ninguno, toca el número.</p>
+                <p>¡No te equivoques o perderás!</p>
+                <button id="close-rules">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="menu.js"></script>
+</body>
+</html>

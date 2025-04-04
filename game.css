@@ -1,0 +1,114 @@
+/* Estilo general */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #6d4c41, #3e2723);
+    color: #fff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  #game-container {
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Encabezado e información */
+  #game-header h1 {
+    margin: 0 0 10px;
+    font-size: 28px;
+  }
+  #info {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  /* Pregunta y número actual */
+  #question h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  #current-number {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #e74c3c;
+  }
+  
+  /* Botones de respuesta */
+  #answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .answer-btn {
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .answer-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Mensaje de respuesta del Bot */
+  #bot-response {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #ffea00;
+  }
+  
+  /* Pop-up de Game Over */
+  #game-over-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+  }
+  #game-over-popup.hidden {
+    display: none;
+  }
+  #game-over-content {
+    background-color: #333;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+  }
+  #game-over-content button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    background-color: #FF5722;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #game-over-content button:hover {
+    background-color: #e64a19;
+  }
+  
+  /* Clase para ocultar elementos */
+  .hidden {
+    display: none;
+  }
+  
